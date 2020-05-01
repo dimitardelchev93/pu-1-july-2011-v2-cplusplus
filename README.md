@@ -23,26 +23,27 @@
 
 Тестови данни
 
-Option 1:
+Option 1 and 2:
 
 1
 1
-title1
+title31
 artist11, artist12
 2000
 10000
 
 1
 3
-title1
+title31
 artist11, artist12
 2000
 10000
-title2
+title22
 artist21, artist22
 4000
 400.23
-title3
+title13
 artist31, artist32
 3000
 30000.24
+2

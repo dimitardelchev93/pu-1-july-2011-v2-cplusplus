@@ -13,7 +13,7 @@ class Movie {
         Movie() {
             do
             {
-                std::cout << "Enter title (40 chars max): ";
+                cout << "Enter title (40 chars max): ";
                 cin.ignore();
                 getline(cin, title);
             }
@@ -21,16 +21,16 @@ class Movie {
 
             do
             {
-                std::cout << "Enter artists (250 chars max, devided by ','): ";
+                cout << "Enter artists (250 chars max, devided by ', '): ";
                 cin.ignore();
                 getline(cin, artists);
             }
             while (artists.length() > 250);
 
-            std::cout << "Enter year: ";
-            std::cin >> year;
-            std::cout << "License tax: ";
-            std::cin >> tax;
+            cout << "Enter year: ";
+            cin >> year;
+            cout << "License tax: ";
+            cin >> tax;
         }
 };
 
@@ -44,37 +44,57 @@ class FilmLibrary {
 
             do
             {
-                std::cout << "Enter quantity of library movies (from 1 to 10000): ";
-                std::cin >> input;
+                cout << "Enter quantity of library movies (from 1 to 10000): ";
+                cin >> input;
             }
             while (input > 10000);
 
-            size = input;
-            movies = new Movie[size];
+            this->size = input;
+ 			this->movies = new Movie[this->size];
+        }
+
+        void sort() {
+            for (int i = 0; i < this->size - 1; i++) {
+                for (int j = 0; j < this->size - 1; j++) {
+                    if (this->movies[j].title > this->movies[j + 1].title) {
+                        Movie tmp = this->movies[j];
+						this->movies[j] = this->movies[j + 1];
+						this->movies[j + 1] = tmp;
+                    }
+                }
+            }
+        }
+
+        void print() {
+            for (int i = 0; i < this->size; i++) {
+                cout << this->movies[i].title << "; ";
+                cout << this->movies[i].artists << "; ";
+                cout << this->movies[i].year << "; ";
+                cout << this->movies[i].year << endl;
+            }
         }
 };
 
-void listOrderedMovies() {
-    std::cout << "Show an ordered list of all the movies" << std::endl;
+void listOrderedMovies(FilmLibrary *filmLibrary) {
+    filmLibrary->sort();
+    filmLibrary->print();
 }
 
 void listDoubleOrderedMovies() {
     char artistCriteria[] = "Robert de Niro";
-    std::cout << "Show an ordered (double) list by all the movies with predetermined criteria " << artistCriteria << std::endl;
+    cout << "Show an ordered (double) list by all the movies with predetermined criteria " << artistCriteria << endl;
 }
 
 void combinedThreeTimesAndTaxAverages() {
-    std::cout << "Do 1 three times, do 2 and 3 based on that and show average tax for each, after that print the highest average tax" << std::endl;
+    cout << "Do 1 three times, do 2 and 3 based on that and show average tax for each, after that print the highest average tax" << endl;
 }
 
 void wrongOptionError() {
-    std::cout << "Wrong option!" << std::endl;
+    cout << "Wrong option!" << endl;
 }
 
-void menu(char option[])
+void menu(char option[], FilmLibrary *filmLibrary)
 {
-    FilmLibrary filmLibrary;
-
     if (option[1] != NULL) {
         wrongOptionError();
         return;
@@ -83,10 +103,10 @@ void menu(char option[])
     switch (option[0])
     {
         case '1':
-            filmLibrary.addMovies();
+            filmLibrary->addMovies();
             break;
         case '2':
-            listOrderedMovies();
+            listOrderedMovies(filmLibrary);
             break;
         case '3':
             listDoubleOrderedMovies();
@@ -104,13 +124,14 @@ void menu(char option[])
 int main()
 {
     char option[1];
+    FilmLibrary *filmLibrary = new FilmLibrary();
 
     do
     {
-        std::cout << "Choose an option from 1 to 4" << std::endl << "Enter option: ";
-        std::cin >> option;
-        menu(option);
+        cout << "Choose an option from 1 to 4" << endl << "Enter option: ";
+        cin >> option;
+        menu(option, filmLibrary);
     } while (option != 0);
 
-    std::cout << "Good bye!" << std::endl;
+    cout << "Good bye!" << endl;
 }
