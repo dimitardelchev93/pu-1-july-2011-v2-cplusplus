@@ -12,9 +12,37 @@
 4. Да се въведе информация за три филмотеки, като се контролира броят на филмите да не надхвърля 10000. За всяка от тях да се изведат справките от точки 2 и 3 и да се пресметне и изведе на екрана средната лицензна такса на филмите от 2010 година. Да се намери и отпечата най-високата от трите средни лицензни такси.
 
 Стъпки:
+
 1. C++ Hello World Project
 2. Menu with the four options, 0 to exit
-3. On 1 Add chosen amount of movies with validation
-4. On 2 Show an ordered list of all the movies
-5. On 3 Show an ordered (double) list by a predetermined criteria of all the movies
-6. On 4 Do 1 three times, do 2 and 3 based on that and show average tax for each, after that print the highest average tax
+3. Option 1 Add chosen amount of movies with validation
+4. Option 2 Show an ordered list of all the movies
+5. Option 3 Show an ordered (double) list by a predetermined criteria of all the movies
+6. Option 4 Do 1 three times, do 2 and 3 based on that and show average tax for each, after that print the highest average tax
+
+
+Тестови данни
+
+Option 1:
+
+1
+1
+title1
+artist11, artist12
+2000
+10000
+
+1
+3
+title1
+artist11, artist12
+2000
+10000
+title2
+artist21, artist22
+4000
+400.23
+title3
+artist31, artist32
+3000
+30000.24

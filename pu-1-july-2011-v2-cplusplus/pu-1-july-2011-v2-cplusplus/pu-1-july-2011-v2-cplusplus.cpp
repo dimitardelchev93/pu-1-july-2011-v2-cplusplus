@@ -1,8 +1,58 @@
 #include <iostream>
+#include <string>
 
-void enterMovies() {
-    std::cout << "Add chosen amount of movies with validation" << std::endl;
-}
+using namespace std;
+
+class Movie {
+    public:
+        string title;
+        string artists;
+        int year;
+        double tax;
+
+        Movie() {
+            do
+            {
+                std::cout << "Enter title (40 chars max): ";
+                cin.ignore();
+                getline(cin, title);
+            }
+            while (title.length() > 40);
+
+            do
+            {
+                std::cout << "Enter artists (250 chars max, devided by ','): ";
+                cin.ignore();
+                getline(cin, artists);
+            }
+            while (artists.length() > 250);
+
+            std::cout << "Enter year: ";
+            std::cin >> year;
+            std::cout << "License tax: ";
+            std::cin >> tax;
+        }
+};
+
+class FilmLibrary {
+    public:
+        int size;
+        Movie *movies;
+
+        void addMovies() {
+            int input;
+
+            do
+            {
+                std::cout << "Enter quantity of library movies (from 1 to 10000): ";
+                std::cin >> input;
+            }
+            while (input > 10000);
+
+            size = input;
+            movies = new Movie[size];
+        }
+};
 
 void listOrderedMovies() {
     std::cout << "Show an ordered list of all the movies" << std::endl;
@@ -23,6 +73,8 @@ void wrongOptionError() {
 
 void menu(char option[])
 {
+    FilmLibrary filmLibrary;
+
     if (option[1] != NULL) {
         wrongOptionError();
         return;
@@ -31,7 +83,7 @@ void menu(char option[])
     switch (option[0])
     {
         case '1':
-            enterMovies();
+            filmLibrary.addMovies();
             break;
         case '2':
             listOrderedMovies();
