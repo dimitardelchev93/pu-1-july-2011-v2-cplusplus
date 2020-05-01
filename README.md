@@ -23,27 +23,27 @@
 
 Тестови данни
 
-Option 1 and 2:
-
 1
-1
-title31
-artist11, artist12
-2000
-10000
-
-1
-3
+5
 title31
 artist11, artist12
 2000
 10000
 title22
-artist21, artist22
-4000
+artist21, Robert de Niro, artist22
+2001
 400.23
 title13
-artist31, artist32
-3000
+artist31, Robert de Niro
+2004
+30001.24
+title13
+Robert de Niro
+2004
+30000.24
+title13
+artist31, Robert de Niro, artist32
+2008
 30000.24
 2
+3

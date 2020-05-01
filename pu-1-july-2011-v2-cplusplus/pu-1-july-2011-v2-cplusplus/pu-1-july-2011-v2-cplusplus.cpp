@@ -14,7 +14,6 @@ class Movie {
             do
             {
                 cout << "Enter title (40 chars max): ";
-                cin.ignore();
                 getline(cin, title);
             }
             while (title.length() > 40);
@@ -22,7 +21,6 @@ class Movie {
             do
             {
                 cout << "Enter artists (250 chars max, devided by ', '): ";
-                cin.ignore();
                 getline(cin, artists);
             }
             while (artists.length() > 250);
@@ -31,6 +29,7 @@ class Movie {
             cin >> year;
             cout << "License tax: ";
             cin >> tax;
+            cin.ignore();
         }
 };
 
@@ -46,11 +45,12 @@ class FilmLibrary {
             {
                 cout << "Enter quantity of library movies (from 1 to 10000): ";
                 cin >> input;
+                cin.ignore();
             }
             while (input > 10000);
 
             this->size = input;
- 			this->movies = new Movie[this->size];
+             this->movies = new Movie[this->size];
         }
 
         void sort() {
@@ -58,31 +58,54 @@ class FilmLibrary {
                 for (int j = 0; j < this->size - 1; j++) {
                     if (this->movies[j].title > this->movies[j + 1].title) {
                         Movie tmp = this->movies[j];
-						this->movies[j] = this->movies[j + 1];
-						this->movies[j + 1] = tmp;
+                        this->movies[j] = this->movies[j + 1];
+                        this->movies[j + 1] = tmp;
                     }
                 }
             }
         }
 
-        void print() {
+        void doubleSort() {
+            for (int i = 0; i < this->size - 1; i++) {
+                for (int j = 0; j < this->size - 1; j++) {
+                    if (
+                        this->movies[j].year < this->movies[j + 1].year
+                        || this->movies[j].year == this->movies[j + 1].year
+                        && this->movies[j].tax > this->movies[j + 1].tax
+                    ) {
+                        Movie tmp = this->movies[j];
+                        this->movies[j] = this->movies[j + 1];
+                        this->movies[j + 1] = tmp;
+                    }
+                }
+            }
+        }
+
+        void print(string artistCriteria) {
             for (int i = 0; i < this->size; i++) {
+                string artists = this->movies[i].artists;
+
+                if (this->movies[i].artists.find(artistCriteria) == string::npos) {
+                    continue;
+                }
+
                 cout << this->movies[i].title << "; ";
                 cout << this->movies[i].artists << "; ";
                 cout << this->movies[i].year << "; ";
-                cout << this->movies[i].year << endl;
+                cout << this->movies[i].tax << endl;
             }
         }
 };
 
 void listOrderedMovies(FilmLibrary *filmLibrary) {
     filmLibrary->sort();
-    filmLibrary->print();
+    filmLibrary->print("");
 }
 
-void listDoubleOrderedMovies() {
-    char artistCriteria[] = "Robert de Niro";
-    cout << "Show an ordered (double) list by all the movies with predetermined criteria " << artistCriteria << endl;
+void listDoubleOrderedMovies(FilmLibrary *filmLibrary) {
+    string artistCriteria = "Robert de Niro";
+    filmLibrary->doubleSort();
+    filmLibrary->print(artistCriteria);
 }
 
 void combinedThreeTimesAndTaxAverages() {
@@ -109,7 +132,7 @@ void menu(char option[], FilmLibrary *filmLibrary)
             listOrderedMovies(filmLibrary);
             break;
         case '3':
-            listDoubleOrderedMovies();
+            listDoubleOrderedMovies(filmLibrary);
             break;
         case '4':
             combinedThreeTimesAndTaxAverages();
