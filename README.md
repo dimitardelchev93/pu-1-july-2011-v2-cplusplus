@@ -20,6 +20,7 @@
 5. Option 3 Show an ordered (double) list by a predetermined criteria of all the movies
 6. Option 4 Do 1 three times, do 2 and 3 based on that and show average tax for each, after that print the highest average tax
 
+Конзолата не работи с кирилица.
 
 Тестови данни
 
@@ -47,3 +48,67 @@ artist31, Robert de Niro, artist32
 30000.24
 2
 3
+4
+5
+title31
+artist11, artist12
+2000
+10000
+title22
+artist21, Robert de Niro, artist22
+2001
+400.23
+title13
+artist31, Robert de Niro
+2004
+101.24
+title13
+Robert de Niro
+2004
+1100.24
+title13
+artist31, Robert de Niro, artist32
+2008
+200.24
+5
+title31
+artist11, artist12
+2000
+22000
+title22
+artist21, Robert de Niro, artist22
+2001
+400.23
+title13
+artist31, Robert de Niro
+2004
+3301.24
+title13
+Robert de Niro
+2004
+30000.24
+title13
+artist31, Robert de Niro, artist32
+2008
+31000.24
+5
+title31
+artist11, artist12
+2000
+10
+title22
+artist21, Robert de Niro, artist22
+2001
+400.23
+title13
+artist31, Robert de Niro
+2004
+101.24
+title13
+Robert de Niro
+2004
+200.24
+title13
+artist31, Robert de Niro, artist32
+2008
+10.24

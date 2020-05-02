@@ -95,22 +95,49 @@ class FilmLibrary {
                 cout << this->movies[i].tax << endl;
             }
         }
+
+        double getAverageTax() {
+            double sum = 0;
+
+            for (int i = 0; i < this->size; i++) {
+                sum += this->movies[i].tax;
+            }
+
+            return sum / this->size;
+        }
+
+        void listOrderedMovies() {
+            this->sort();
+            this->print("");
+        }
+
+        void listDoubleOrderedMovies() {
+            this->doubleSort();
+            this->print("Robert de Niro");
+        }
+
+        void combinedThreeTimesAndTaxAverages() {
+            double maxAverageTax = 0;
+
+            for (int i = 0; i < 3; i++) {
+                FilmLibrary* filmLibrary = new FilmLibrary();
+
+                filmLibrary->addMovies();
+                filmLibrary->listOrderedMovies();
+                filmLibrary->listDoubleOrderedMovies();
+
+                double averageTax = filmLibrary->getAverageTax();
+
+                cout << "Average tax is " << averageTax << endl;
+
+                if (averageTax > maxAverageTax) {
+                    maxAverageTax = averageTax;
+                }
+            }
+
+            cout << "Max average tax is " << maxAverageTax << endl;
+        }
 };
-
-void listOrderedMovies(FilmLibrary *filmLibrary) {
-    filmLibrary->sort();
-    filmLibrary->print("");
-}
-
-void listDoubleOrderedMovies(FilmLibrary *filmLibrary) {
-    string artistCriteria = "Robert de Niro";
-    filmLibrary->doubleSort();
-    filmLibrary->print(artistCriteria);
-}
-
-void combinedThreeTimesAndTaxAverages() {
-    cout << "Do 1 three times, do 2 and 3 based on that and show average tax for each, after that print the highest average tax" << endl;
-}
 
 void wrongOptionError() {
     cout << "Wrong option!" << endl;
@@ -129,13 +156,13 @@ void menu(char option[], FilmLibrary *filmLibrary)
             filmLibrary->addMovies();
             break;
         case '2':
-            listOrderedMovies(filmLibrary);
+            filmLibrary->listOrderedMovies();
             break;
         case '3':
-            listDoubleOrderedMovies(filmLibrary);
+            filmLibrary->listDoubleOrderedMovies();
             break;
         case '4':
-            combinedThreeTimesAndTaxAverages();
+            filmLibrary->combinedThreeTimesAndTaxAverages();
             break;
 
         default:
