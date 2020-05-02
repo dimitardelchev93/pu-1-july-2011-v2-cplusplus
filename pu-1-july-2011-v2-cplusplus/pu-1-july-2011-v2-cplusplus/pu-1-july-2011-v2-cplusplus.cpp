@@ -49,71 +49,71 @@ class FilmLibrary {
             }
             while (input > 10000);
 
-            this->size = input;
-             this->movies = new Movie[this->size];
+            size = input;
+            movies = new Movie[size];
         }
 
         void sort() {
-            for (int i = 0; i < this->size - 1; i++) {
-                for (int j = 0; j < this->size - 1; j++) {
-                    if (this->movies[j].title > this->movies[j + 1].title) {
-                        Movie tmp = this->movies[j];
-                        this->movies[j] = this->movies[j + 1];
-                        this->movies[j + 1] = tmp;
+            for (int i = 0; i < size - 1; i++) {
+                for (int j = 0; j < size - 1; j++) {
+                    if (movies[j].title > movies[j + 1].title) {
+                        Movie tmp = movies[j];
+                        movies[j] = movies[j + 1];
+                        movies[j + 1] = tmp;
                     }
                 }
             }
         }
 
         void doubleSort() {
-            for (int i = 0; i < this->size - 1; i++) {
-                for (int j = 0; j < this->size - 1; j++) {
+            for (int i = 0; i < size - 1; i++) {
+                for (int j = 0; j < size - 1; j++) {
                     if (
-                        this->movies[j].year < this->movies[j + 1].year
-                        || this->movies[j].year == this->movies[j + 1].year
-                        && this->movies[j].tax > this->movies[j + 1].tax
+                        movies[j].year < movies[j + 1].year
+                        || movies[j].year == movies[j + 1].year
+                        && movies[j].tax > movies[j + 1].tax
                     ) {
-                        Movie tmp = this->movies[j];
-                        this->movies[j] = this->movies[j + 1];
-                        this->movies[j + 1] = tmp;
+                        Movie tmp = movies[j];
+                        movies[j] = movies[j + 1];
+                        movies[j + 1] = tmp;
                     }
                 }
             }
         }
 
         void print(string artistCriteria) {
-            for (int i = 0; i < this->size; i++) {
-                string artists = this->movies[i].artists;
+            for (int i = 0; i < size; i++) {
+                string artists = movies[i].artists;
 
-                if (this->movies[i].artists.find(artistCriteria) == string::npos) {
+                if (movies[i].artists.find(artistCriteria) == string::npos) {
                     continue;
                 }
 
-                cout << this->movies[i].title << "; ";
-                cout << this->movies[i].artists << "; ";
-                cout << this->movies[i].year << "; ";
-                cout << this->movies[i].tax << endl;
+                cout << movies[i].title << "; ";
+                cout << movies[i].artists << "; ";
+                cout << movies[i].year << "; ";
+                cout << movies[i].tax << endl;
             }
         }
 
         double getAverageTax() {
             double sum = 0;
 
-            for (int i = 0; i < this->size; i++) {
-                sum += this->movies[i].tax;
+            for (int i = 0; i < size; i++) {
+                sum += movies[i].tax;
             }
 
-            return sum / this->size;
+            return sum / size;
         }
 
         void listOrderedMovies() {
-            this->sort();
-            this->print("");
+            sort();
+            print("");
         }
 
         void listDoubleOrderedMovies() {
-            this->doubleSort();
-            this->print("Robert de Niro");
+            doubleSort();
+            print("Robert de Niro");
         }
 
         void combinedThreeTimesAndTaxAverages() {
@@ -143,15 +143,17 @@ void wrongOptionError() {
     cout << "Wrong option!" << endl;
 }
 
-void menu(char option[], FilmLibrary *filmLibrary)
+void menu(string option, FilmLibrary *filmLibrary)
 {
-    if (option[1] != NULL) {
+    if (option.length() != 1) {
         wrongOptionError();
         return;
     }
 
     switch (option[0])
     {
+		case '0':
+			break;
         case '1':
             filmLibrary->addMovies();
             break;
@@ -173,7 +175,7 @@ void menu(char option[], FilmLibrary *filmLibrary)
 
 int main()
 {
-    char option[1];
+    string option;
     FilmLibrary *filmLibrary = new FilmLibrary();
 
     do
@@ -181,7 +183,7 @@ int main()
         cout << "Choose an option from 1 to 4" << endl << "Enter option: ";
         cin >> option;
         menu(option, filmLibrary);
-    } while (option != 0);
+    } while (option != "0");
 
     cout << "Good bye!" << endl;
 }
